@@ -6,6 +6,9 @@
       <list>
         <option value="$PROJECT_DIR$/productservice/productservice/pom.xml" />
         <option value="$PROJECT_DIR$/configserver/configserver/pom.xml" />
+        <option value="$PROJECT_DIR$/microservices/configserver/configserver/pom.xml" />
+        <option value="$PROJECT_DIR$/microservices/productservice/productservice/pom.xml" />
+        <option value="$PROJECT_DIR$/microservices/inventoryservice/inventoryservice/pom.xml" />
       </list>
     </option>
   </component>
