@@ -31,6 +31,7 @@ public class InventoryService {
             throw  new OutOfStockException("Product is already empty cannot decrease anymore");
         }
         inventory.setQuantity(updatedQuantity);
+        inventoryRepo.save(inventory);
         return updatedQuantity;
 
     }
@@ -43,13 +44,14 @@ public class InventoryService {
         if(updatedReserveQuantity>availabeQuantity){
             throw new OutOfStockException("Out of stock");
         }
-        inventory.setReserved_quantity(reserveQuantity);
+        inventory.setReserved_quantity(updatedReserveQuantity);
+        inventoryRepo.save(inventory);
         return updatedReserveQuantity;
     }
 
-    public Boolean checkIfAvailabe( int productId, int quantity) {
+    public Boolean checkIfAvailabe( int productId, int Availabequantity) {
         Inventory inventory= inventoryRepo.findByProductId(productId)
                 .orElseThrow(()-> new ResourceNotFoundException("Cannot find the inventory with productId"+ productId));
-        return (inventory.getQuantity()-inventory.getReserved_quantity()>=quantity)? true : false;
+        return (inventory.getQuantity()-inventory.getReserved_quantity()>=Availabequantity)? true : false;
     }
 }

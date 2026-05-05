@@ -12,7 +12,7 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int id;
     @Column(unique = true,nullable = false)
-    private int product_id;
+    private int productId;
     private int quantity;
     private int reserved_quantity;
 }

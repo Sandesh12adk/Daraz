@@ -1,6 +1,7 @@
 package com.example.inventoryservice.exception;
 
 import com.example.inventoryservice.dto.ErrorResponse;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -40,6 +43,25 @@ public class GlobalExceptionHandler {
                 HttpStatus.NOT_FOUND.value(),
                 "NOT_FOUND",
                 ex.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(error);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleManv(MethodArgumentNotValidException ex, HttpServletRequest request){
+        List<String> errorList= new ArrayList<>();
+        ex.getBindingResult().getFieldErrors().forEach((error)->
+        {
+            errorList.add(error.getField() + " "+ error.getDefaultMessage());
+        });
+        ErrorResponse error = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                "NOT_FOUND",
+                 errorList.toString(),
                 request.getRequestURI()
         );
 

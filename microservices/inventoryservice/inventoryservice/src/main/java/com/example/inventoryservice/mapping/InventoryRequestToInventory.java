@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class InventoryRequestToInventory {
-    public Inventory convert(InventoryRequest inventoryRequest){
-        Inventory inventory= new Inventory();
+    public Inventory convert(InventoryRequest inventoryRequest) {
+        Inventory inventory = new Inventory();
         inventory.setQuantity(inventoryRequest.getQuantity());
-        inventory.setReserved_quantity(0);
+        inventory.setProductId(inventoryRequest.getProductId());
         return inventory;
     }
 }
