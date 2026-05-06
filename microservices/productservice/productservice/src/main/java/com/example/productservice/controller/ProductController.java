@@ -6,6 +6,7 @@ import com.example.productservice.mapping.ProductRequestToProduct;
 import com.example.productservice.mapping.ProductToProductResponse;
 import com.example.productservice.model.Product;
 import com.example.productservice.repo.ProductRepo;
+import com.example.productservice.service.KafkaService;
 import com.example.productservice.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +23,22 @@ public class ProductController {
     @Autowired
     private ProductRequestToProduct productRequestToProduct;
     @Autowired
-    private ProductToProductResponse productToProductResponsep;
+    private ProductToProductResponse productToProductResponse;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private KafkaService kafkaService;
     @Autowired
     public ProductController(ProductRepo productrepo){
         this.productrepo= productrepo;
     }
     @PostMapping("/add")
     public ResponseEntity<ProductResponse> saveProduct(@Valid @RequestBody  ProductRequest productRequest){
-      return  ResponseEntity.ok(productToProductResponsep.convert(productrepo.save(
-                productRequestToProduct.convert(productRequest)
-        )));
+       Product product= productrepo.save(productRequestToProduct.convert(productRequest));
+       ProductResponse productResponse = productToProductResponse.convert(product);
+       kafkaService.sendProductCreatedEvent(product.getId());
+               return  ResponseEntity.ok(productResponse);
+
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable int id){
