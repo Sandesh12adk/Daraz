@@ -43,6 +43,7 @@ public class ProductController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable int id){
         productService.deleteProduct(id);
+        kafkaService.sendProductDeletedEvent(id);
         return ResponseEntity.noContent().build();
     }
     @PutMapping("/update/{id}")
