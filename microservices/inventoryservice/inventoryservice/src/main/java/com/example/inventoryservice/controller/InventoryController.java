@@ -31,7 +31,7 @@ public class InventoryController {
     public ResponseEntity<Integer> reserveQuantity(@RequestParam int productId, @RequestParam int reserveQuantity){
         return ResponseEntity.ok(inventoryService.reserve(productId,reserveQuantity));
     }
-    @GetMapping("check") // it check for total quantity - reserved_quantity
+    @GetMapping("/check") // it check for total quantity - reserved_quantity
     public ResponseEntity<Boolean> checkIfAvailable(@RequestParam int productId, @RequestParam int  Availablequantity){
         return ResponseEntity.ok(inventoryService.checkIfAvailabe(productId,  Availablequantity));
     }
