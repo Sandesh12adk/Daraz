@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpbDataSourceConfig">
+    <data-sources>
+      <data-source id="ebbee505-ab60-4836-b948-d837e079b0c5" name="Daraz" url="jdbc:postgresql://localhost/Daraz" driverClass="org.postgresql.Driver" />
+      <data-source id="ba0c5ca6-99b9-4e90-9338-5bc6d6468710" name="Darazm" url="jdbc:mysql://localhost/Daraz?useSSL=false&amp;allowMultiQueries=true&amp;serverTimezone=UTC" driverClass="com.mysql.cj.jdbc.Driver" />
+    </data-sources>
+  </component>
+</project>
