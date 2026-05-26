@@ -25,7 +25,7 @@ public class ProductRequest {
     private int stock;
 
     @NotNull(message = "User ID is required")
-    private Integer userid; // Using Integer wrapper allows @NotNull to catch null values
+    private Integer sellerId; // Using Integer wrapper allows @NotNull to catch null values
 
     @NotBlank(message = "Category is mandatory")
     private String category;

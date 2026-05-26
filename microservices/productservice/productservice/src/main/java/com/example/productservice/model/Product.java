@@ -21,7 +21,7 @@ public class Product {
     private String description;
     private float price;
     private int stock;
-    private int userid;
+    private int sellerId;
     @CreatedDate
     private LocalDateTime createdAt;
     @ManyToOne

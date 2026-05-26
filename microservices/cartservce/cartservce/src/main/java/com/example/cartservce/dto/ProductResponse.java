@@ -13,7 +13,7 @@ public class ProductResponse {
     private String description;
     private float price;
     private int stock;
-    private int userid; //. later we will fetch from JWT for now do manually
+    private int userid; //. later we will fetch from JWT for now do  /** This is seller id actually */
     private String category;
     private String imageUrl;
     private String brand;

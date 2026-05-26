@@ -42,7 +42,8 @@ public class CartService {
             throw new RuntimeException("Out of stock");
         }
 
-        float price = getProduct(productId).getPrice();
+        ProductResponse product = getProduct(productId);
+        float price = product.getPrice();
 
         Cart cart = cartRepo.findByUserId(userId)
                 .orElseGet(() -> {
@@ -66,6 +67,11 @@ public class CartService {
             newItem.setProductId(productId);
             newItem.setProductQuantity(quantity);
             newItem.setProductPriceSnapshot(price);
+
+            // NEW FIELDS (IMPORTANT)
+            newItem.setName(product.getName());
+            newItem.setDescription(product.getDescription());
+
             newItem.setCart(cart);
             cart.getCartItemList().add(newItem);
         }
@@ -85,7 +91,6 @@ public class CartService {
     public CartResponse increaseQuantity(int userId, int productId, int quantity) {
 
         Cart cart = getCart(userId);
-
         CartItem item = findItem(cart, productId);
 
         int newQty = item.getProductQuantity() + quantity;
@@ -103,7 +108,6 @@ public class CartService {
     public CartResponse decreaseQuantity(int userId, int productId, int quantity) {
 
         Cart cart = getCart(userId);
-
         CartItem item = findItem(cart, productId);
 
         int newQty = item.getProductQuantity() - quantity;
@@ -125,7 +129,6 @@ public class CartService {
     public CartResponse removeItem(int userId, int productId) {
 
         Cart cart = getCart(userId);
-
         CartItem item = findItem(cart, productId);
 
         cart.getCartItemList().remove(item);
@@ -137,7 +140,6 @@ public class CartService {
     public void clearCart(int userId) {
 
         Cart cart = getCart(userId);
-
         cart.getCartItemList().clear();
 
         cartRepo.save(cart);
@@ -149,6 +151,7 @@ public class CartService {
         Cart cart = getCart(userId);
 
         int totalItems = cart.getCartItemList().size();
+
         int totalQty = cart.getCartItemList()
                 .stream()
                 .mapToInt(CartItem::getProductQuantity)
@@ -158,6 +161,7 @@ public class CartService {
                 .stream()
                 .mapToDouble(i -> i.getProductPriceSnapshot() * i.getProductQuantity())
                 .sum();
+
         Map<String, Object> map = new HashMap<>();
         map.put("totalItems", totalItems);
         map.put("totalQuantity", totalQty);
@@ -176,7 +180,6 @@ public class CartService {
         }
 
         // TODO: call Order Service (future microservice)
-        //6200
 
         cart.getCartItemList().clear();
         cartRepo.save(cart);

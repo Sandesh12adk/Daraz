@@ -22,7 +22,7 @@ public class ProductToProductResponse {
         productResponse.setPrice(product.getPrice());
         productResponse.setCategory(product.getCategory().getName());
         productResponse.setStock(product.getStock());
-        productResponse.setUserid(product.getUserid());
+        productResponse.setUserid(product.getSellerId());
         productResponse.setImageUrl(product.getImageList().get(0).getUrl());
         return productResponse;
     }

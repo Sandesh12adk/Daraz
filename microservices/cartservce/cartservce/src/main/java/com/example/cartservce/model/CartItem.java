@@ -15,6 +15,8 @@ public class CartItem {
     private int productId;
     private float productPriceSnapshot;
     private int productQuantity;
+    private String name;
+    private String description;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "cart_id")

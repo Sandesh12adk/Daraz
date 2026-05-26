@@ -48,7 +48,7 @@ public class ProductService {
         productInDb.setDescription(productRequest.getDescription());
         productInDb.setPrice(productRequest.getPrice());
         productInDb.setStock(productRequest.getStock());
-        productInDb.setUserid(productRequest.getUserid());
+        productInDb.setSellerId(productRequest.getSellerId());
         productInDb.setCreatedAt(productInDb.getCreatedAt());
         productInDb.setBrand(
                 brandRepo.findByname(productRequest.getBrand()).orElseThrow(() ->
@@ -77,7 +77,7 @@ public class ProductService {
         return productToProductResponse.convert(product);
     }
     public List<ProductResponse> getProductsByUser(int userId){
-        return productRepo.findByUserid(userId)
+        return productRepo.findBySellerId(userId)
                 .stream()
                 .map(productToProductResponse::convert)
                 .toList();

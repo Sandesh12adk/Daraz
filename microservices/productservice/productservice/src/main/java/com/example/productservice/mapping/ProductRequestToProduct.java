@@ -47,7 +47,7 @@ public class ProductRequestToProduct {
 
        product.setStock(productRequest.getStock());
        product.setPrice(productRequest.getPrice());
-       product.setUserid(1);   // 6200 Later get this from the JwT
+       product.setSellerId(productRequest.getSellerId());   // 6200 Later get this from the JwT
         return product;
     }
 }

@@ -1,12 +1,7 @@
-package com.example.cartservce.dto;
-
-import com.example.cartservce.constants.CartStatus;
-import com.example.cartservce.model.CartItem;
-import jakarta.persistence.*;
+package com.example.orderservice.dto;
+import com.example.orderservice.constant.CartStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 import java.util.List;
